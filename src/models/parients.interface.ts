@@ -6,3 +6,10 @@ export interface Patient {
   website: string;
   createdAt: string;
 }
+
+export interface PatientsState {
+  data: Patient[];
+  loading: boolean;
+  error: string | null;
+}
+
