@@ -2,15 +2,15 @@ import { useState } from 'react';
 import styles from './App.module.css';
 import { Button } from './components/Button/Button';
 import { PatientCard } from './components/PatientCard/PatientCard';
+import { Modal } from './components/Modal/Modal';
 import type { Patient } from './models/parients.interface';
 import { MOCK_PATIENTS } from './mocks/patients-mock';
-import { Modal } from './components/Modal/Modal';
+import { PatientForm } from './components/Form/Form';
+import type { PatientFormData } from './models/form.interface';
 
 function App() {
-  const [patients] = useState<Patient[]>(MOCK_PATIENTS);
-
+  const [patients, setPatients] = useState<Patient[]>(MOCK_PATIENTS);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
 
   const handleEdit = (p: Patient) => {
@@ -28,6 +28,27 @@ function App() {
     setTimeout(() => setSelectedPatient(null), 300);
   };
 
+  const handleSavePatient = (formData: PatientFormData) => {
+    if (selectedPatient) {
+      setPatients((prev) =>
+        prev.map((p) =>
+          p.id === selectedPatient.id
+            ? { ...p, ...formData }
+            : p
+        )
+      );
+    } else {
+      const newPatient: Patient = {
+        id: crypto.randomUUID(),
+        createdAt: new Date().toISOString(),
+        ...formData,
+      };
+      setPatients((prev) => [...prev, newPatient]);
+    }
+
+    handleCloseModal();
+  };
+
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
@@ -42,7 +63,7 @@ function App() {
       </header>
 
       <main className={styles.gridContainer}>
-        {patients.map(patient => (
+        {patients.map((patient) => (
           <PatientCard
             key={patient.id}
             patient={patient}
@@ -53,21 +74,14 @@ function App() {
 
       <Modal
         isOpen={isModalOpen}
-        title={selectedPatient ? "Editar Paciente" : "Agregar Paciente"}
         onClose={handleCloseModal}
+        title={selectedPatient ? "Editar Paciente" : "Agregar Paciente"}
       >
-        <div style={{ padding: '20px' }}>
-          <p>
-            {selectedPatient
-              ? `Editando a: ${selectedPatient.name}`
-              : "Formulario para crear nuevo paciente"}
-          </p>
-        </div>
-
-        <div style={{ padding: '20px', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
-          <Button onClick={handleCloseModal} variant="secondary">Cancelar</Button>
-          <Button onClick={() => console.log('Guardar')}>Guardar</Button>
-        </div>
+        <PatientForm
+          defaultValues={selectedPatient}
+          onSubmit={handleSavePatient}
+          onCancel={handleCloseModal}
+        />
       </Modal>
     </div>
   );

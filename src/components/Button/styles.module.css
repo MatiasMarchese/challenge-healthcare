@@ -32,3 +32,9 @@
   background-color: var(--color-danger);
   color: white;
 }
+
+button:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  pointer-events: none;
+}
