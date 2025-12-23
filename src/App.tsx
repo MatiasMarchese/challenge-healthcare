@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import styles from './App.module.css';
+import { Button } from './components/Button/Button';
+import { PatientCard } from './components/PatientCard/PatientCard';
+import type { Patient } from './models/parients.interface';
+import { MOCK_PATIENTS } from './mocks/patients-mock';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [patients] = useState<Patient[]>(MOCK_PATIENTS);
+
+  const handleEdit = (p: Patient) => console.log('Edit', p);
+  const handleAdd = () => console.log('Add New');
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className={styles.layout}>
+      <header className={styles.header}>
+        <div className={styles.brand}>
+          <div className={styles.logoCircle}></div>
+          <h1>Pacientes</h1>
+        </div>
+
+        <Button onClick={handleAdd}>
+          AGREGAR PACIENTE
+        </Button>
+      </header>
+
+      <main className={styles.gridContainer}>
+        {patients.map(patient => (
+          <PatientCard
+            key={patient.id}
+            patient={patient}
+            onEdit={handleEdit}
+          />
+        ))}
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
