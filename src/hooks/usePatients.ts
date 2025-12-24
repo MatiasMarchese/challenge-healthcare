@@ -1,11 +1,15 @@
-import { useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import type { Patient } from "../models/parients.interface";
-import { addPatientLocal, deletePatientLocal, fetchPatients, updatePatientLocal } from "../redux/store/slices/patient-slice";
-import type { PatientFormData } from "../models/form.interface";
-import { type RootState } from "../redux/store/store";
-import type { AppDispatch } from "../redux/store/store";
+import type { PatientFormData } from "@/models/form.interface";
+import type { Patient } from "@/models/patients.interface";
+import {
+  addPatientLocal,
+  fetchPatients,
+  updatePatientLocal,
+} from "@/redux/store/slices/patient-slice";
+import type { AppDispatch } from "@/redux/store/store";
+import { type RootState } from "@/redux/store/store";
 
 export const usePatients = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -45,19 +49,11 @@ export const usePatients = () => {
     [dispatch, data]
   );
 
-  const deletePatient = useCallback(
-    (id: string) => {
-      dispatch(deletePatientLocal(id));
-    },
-    [dispatch]
-  );
-
   return {
     patients: data,
     isLoading: loading,
     isError: !!error,
     addPatient,
     updatePatient,
-    deletePatient,
   };
 };
