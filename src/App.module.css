@@ -32,8 +32,7 @@
   color: var(--color-text-main);
 }
 
-.gridContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--spacing-lg);
+.mainContainer {
+  width: 100%;
+  margin-top: var(--spacing-lg);
 }

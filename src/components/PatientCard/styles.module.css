@@ -57,6 +57,11 @@
   font-weight: 500;
   margin-top: auto;
   text-decoration: none;
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .website:hover {
