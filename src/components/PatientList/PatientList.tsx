@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
+import type { Patient } from "@/models/patients.interface";
 import { PatientCard } from "../PatientCard/PatientCard";
-import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
-import type { Patient } from "../../models/parients.interface";
-import styles from "./styles.module.css";
 import { Spinner } from "../Spinner/Spinner";
+import styles from "./patient-list.module.css";
 
 interface PatientsListProps {
   patients: Patient[];
@@ -45,7 +45,7 @@ export const PatientsList: React.FC<PatientsListProps> = ({
       )}
 
       {limit >= patients.length && patients.length > 0 && (
-        <div className="list-status">No hay más pacientes para mostrar.</div>
+        <div className={styles.status}>No hay más pacientes para mostrar.</div>
       )}
     </div>
   );

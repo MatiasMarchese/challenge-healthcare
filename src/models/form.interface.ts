@@ -1,4 +1,4 @@
-import type { Patient } from "./parients.interface";
+import type { Patient } from "./patients.interface";
 
 export interface PatientFormData {
   name: string;

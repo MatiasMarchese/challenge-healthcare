@@ -1,6 +1,6 @@
 import { type ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import styles from './styles.module.css';
+import styles from './modal.module.css';
 
 interface ModalProps {
   isOpen: boolean;
@@ -31,9 +31,8 @@ export const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
   if (!isOpen) return null;
 
   return createPortal(
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modalContainer} onClick={(e) => e.stopPropagation()}>
-
+    <div className={styles.overlay}>
+      <div className={styles.modalContainer}>
         {(title || !!onClose) && (
           <div className={styles.header}>
             {title && <h2 className={styles.title}>{title}</h2>}

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import styles from './styles.module.css';
-import { Button } from '../Button/Button';
-import type { PatientFormData, PatientFormProps } from '../../models/form.interface';
+import styles from './form.module.css';
+import { Button } from '@/components/Button/Button';
+import type { PatientFormData, PatientFormProps } from '@/models/form.interface';
 
 export const PatientForm = ({ defaultValues, onSubmit, onCancel }: PatientFormProps) => {
   const {
