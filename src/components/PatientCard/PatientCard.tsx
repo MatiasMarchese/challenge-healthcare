@@ -1,6 +1,7 @@
-import type { Patient } from "../../models/patients.interface";
-import { Button } from "../Button/Button";
-import { Card } from "../Card/Card";
+import { useState } from "react";
+import type { Patient } from "@/models/patients.interface";
+import { Button } from "@/components/Button/Button";
+import { Card } from "@/components/Card/Card";
 import styles from "./patient-card.module.css";
 
 interface PatientCardProps {
@@ -9,6 +10,7 @@ interface PatientCardProps {
 }
 
 export const PatientCard = ({ patient, onEdit }: PatientCardProps) => {
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const formattedDate = new Date(patient.createdAt).toLocaleDateString(
     "es-ES",
     {
@@ -17,6 +19,8 @@ export const PatientCard = ({ patient, onEdit }: PatientCardProps) => {
       year: "numeric",
     }
   );
+
+  const showToggle = patient.description.length > 100;
 
   return (
     <Card className={styles.container}>
@@ -39,14 +43,26 @@ export const PatientCard = ({ patient, onEdit }: PatientCardProps) => {
       <div className={styles.cardBody}>
         <span className={styles.date}>{formattedDate}</span>
         <h3 className={styles.name}>{patient.name}</h3>
-        <p className={styles.description}>{patient.description}</p>
+
+        <div
+          className={`${styles.descriptionWrapper} ${
+            isExpanded ? styles.expanded : ""
+          }`}
+        >
+          <p className={styles.description}>{patient.description}</p>
+        </div>
+
+        {showToggle && (
+          <p
+            className={styles.toggleBtn}
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            {isExpanded ? "Ver menos" : "Ver más..."}
+          </p>
+        )}
 
         {patient.website && (
-          <a
-            href={patient.website}
-            target="_blank"
-            className={styles.website}
-          >
+          <a href={patient.website} target="_blank" className={styles.website}>
             {patient.website.replace(/^https?:\/\//, "")}
           </a>
         )}
