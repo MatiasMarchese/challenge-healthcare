@@ -72,6 +72,14 @@ This allows you to view the application on **any device** connected to the same 
 
 This dashboard allows users to view, create, and edit patient data efficiently. It was built to demonstrate advanced frontend concepts such as **Server-State Management**, **Component Composition**, and **Performance Optimization** techniques.
 
+## Design Process
+
+Here are the initial wireframes created before development:
+
+![Initial Wireframe](./docs/wireframe-inicial.png)
+
+![High Fidelity Mockup](./docs/diseño-mockup.png)
+
 ## Tech Stack
 
 - **Core:** React 18, TypeScript, Vite.
