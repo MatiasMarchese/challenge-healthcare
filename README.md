@@ -6,12 +6,12 @@ A modern, high-performance Single Page Application (SPA) for managing patient re
 
 ## Table of Contents
 
-- [Project Overview](#-project-overview)
-- [Tech Stack](#-tech-stack)
-- [Architecture & Design Patterns](#-architecture--design-patterns)
-- [Key Features & Optimizations](#-key-features--optimizations)
-- [Getting Started](#-getting-started)
-- [Running on Mobile/Tablet](#-running-on-mobiletablet-network-mode)
+- [Project Overview](#project-overview)
+- [Tech Stack](#tech-stack)
+- [Architecture & Design Patterns](#architecture--design-patterns)
+- [Key Features & Optimizations](#key-features--optimizations)
+- [Getting Started](#getting-started)
+- [Accessing from Any Device](#accessing-from-any-device-network-mode)
 
 ---
 
@@ -67,7 +67,7 @@ The application follows a **Modular Component-Based Architecture**, adhering to 
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/MatiasMarchese/challenge-healthcare.git
+    git clone [https://github.com/MatiasMarchese/challenge-healthcare.git](https://github.com/MatiasMarchese/challenge-healthcare.git)
     ```
 2.  Navigate to the project directory:
     ```bash
@@ -78,31 +78,9 @@ The application follows a **Modular Component-Based Architecture**, adhering to 
     npm install
     ```
 
-### Running Locally and Share with any device
+### Running Locally
 
 To start the development server on your machine:
 
+```bash
 npm run dev
-npm run -- --host (This enables access to the project from other devices on the same network, eliminating the need to clone the repository on each device.)
-
-## Accessing from Any Device (Network Mode)
-
-This allows you to view the application on **any device** connected to the same local network (Tablets, Smartphones, or other computers), eliminating the need to clone the repository on every machine to test it.
-
-1.  Run the host command:
-    ```bash
-    npm run dev -- --host
-    ```
-
-2.  **Check the terminal output.** Look for the line(s) labeled `Network`. Copy the IP address provided there.
-
-    *Example output:*
-    ```text
-      ➜  Local:   http://localhost:5173/
-      ➜  Network: [http://192.168.137.1:5173/](http://192.168.137.1:5173/)  <-- Use this URL
-      ➜  Network: [http://10.130.2.39:5173/](http://10.130.2.39:5173/)    <-- Or this one
-    ```
-
-3.  Enter that URL (including the port number) in the browser of your external device.
-
-> **Note:** If multiple "Network" addresses appear, try the first one. If the page does not load, ensure your computer's Firewall allows connections on port 5173.
