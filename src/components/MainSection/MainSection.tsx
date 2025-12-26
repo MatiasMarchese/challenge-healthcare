@@ -43,15 +43,22 @@ export const MainSection = () => {
     setIsModalOpen(false);
   };
 
-  const handleSavePatient = (formData: PatientFormData) => {
+const handleSavePatient = (formData: PatientFormData) => {
+  try {
     if (selectedPatient) {
       updatePatient(selectedPatient.id, formData);
-      showNotification("Paciente actualizado correctamente", "success");
+      showNotification("Paciente actualizado", "success");
     } else {
       addPatient(formData);
+      showNotification("Paciente creado", "success");
     }
+
     handleCloseModal();
-  };
+  } catch (error) {
+    console.error("CRASH:", error);
+    showNotification(`Error inesperado: ${error}`, "error");
+  }
+};
 
   const handleEdit = (p: Patient) => {
     setSelectedPatient(p);
