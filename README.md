@@ -69,7 +69,7 @@ The application follows a **Modular Component-Based Architecture**, adhering to 
     git clone https://github.com/MatiasMarchese/challenge-healthcare.git
     ```
 2.  Navigate to the project directory:
-    cd patient-dashboard
+    cd challenge-healthcare
     ```
 3.  Install dependencies:
     npm install
