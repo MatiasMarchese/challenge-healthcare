@@ -1,0 +1,98 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  height: 100%;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 2px solid var(--color-primary-light);
+  background-color: var(--color-background);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.date {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.descriptionWrapper {
+  max-height: 4.5em; 
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+}
+
+.expanded {
+  max-height: 500px; 
+}
+
+.description {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.toggleBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-top: 0.25rem;
+  
+  cursor: pointer;
+  align-self: flex-start;
+  
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  
+  transition: color 0.2s ease;
+}
+
+.toggleBtn:hover {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+.website {
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-top: auto;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.website:hover {
+  text-decoration: underline;
+  color: var(--color-secondary);
+}
