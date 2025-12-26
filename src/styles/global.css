@@ -6,12 +6,11 @@
   --color-secondary: #8b5cf6;
   --color-secondary-hover: #7c3aed;
   
-  --brand-gradient: linear-gradient(135deg, #00D09C 0%, #8b5cf6 100%);
+  --brand-gradient: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
 
   /* Notifications colors */
-  --color-danger: #f87171;
-  --color-warning: #fbbf24;      
-  --color-success: #34d399;      
+  --color-danger: #f87171;     
+  --color-success: var(--color-secondary);
 
   --color-background: #0f172a;
   

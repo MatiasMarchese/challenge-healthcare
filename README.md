@@ -1,28 +1,105 @@
-# Healthcare Patient Manager Challenge
+# Patient Management Dashboard
 
-A robust, scalable frontend application built with React and TypeScript to manage patient records. This project focuses on **Clean Architecture principles**, **Custom UI Design**, and **State Management efficiency**.
+A modern, high-performance Single Page Application (SPA) for managing patient records. This project focuses on **scalability**, **maintainable architecture**, and a polished **User Experience (UX)**.
 
-##  Tech Stack
+---
 
-* **Core:** React 18, TypeScript, Vite.
-* **State Management:** Redux Toolkit (configured for scalability).
-* **Styling:** CSS Modules, CSS Variables (Design Tokens), Native Dark Mode support.
-* **Architecture:** Pragmatic Clean Architecture (Role-based separation).
-* **No UI Libraries:** All components (Modals, Cards, Inputs) are built from scratch 
+## Table of Contents
 
-##  Architecture & Design Decisions
+- [Project Overview](#-project-overview)
+- [Tech Stack](#-tech-stack)
+- [Architecture & Design Patterns](#-architecture--design-patterns)
+- [Key Features & Optimizations](#-key-features--optimizations)
+- [Getting Started](#-getting-started)
+- [Running on Mobile/Tablet](#-running-on-mobiletablet-network-mode)
 
-The project structure follows a **Pragmatic Clean Architecture** approach to ensure scalability and maintainability without over-engineering.
+---
 
-### Folder Structure
-```text
-src/
-├── adapters/       #  Transforms "dirty" API data into clean App Models.
-├── components/     #  Reusable "dumb" UI components (Atoms/Molecules).
-├── hooks/          #  Custom logic hooks (separation of concerns).
-├── models/         #  TypeScript Interfaces defining the Domain Entities.
-├── pages/          #  Views that connect Redux state with UI components.
-├── redux/          #  Global State management slices.
-├── services/       #  HTTP requests (API layer).
-├── styles/         #  Design Tokens, Global Variables, and Resets.
-└── utilities/      #  Pure functions (formatters, validators).
+## Project Overview
+
+This dashboard allows users to view, create, and edit patient data efficiently. It was built to demonstrate advanced frontend concepts such as **Server-State Management**, **Component Composition**, and **Performance Optimization** techniques.
+
+## Tech Stack
+
+- **Core:** React 18, TypeScript, Vite.
+- **State Management:** Redux Toolkit (RTK) & RTK Query.
+- **Styling:** CSS Modules (BEM methodology adapted).
+
+## Architecture & Design Patterns
+
+The application follows a **Modular Component-Based Architecture**, adhering to **Flux** principles for predictable state flow.
+
+### Implemented Design Patterns
+
+1.  **Adapter Pattern (Data Transformation Layer):**
+    -   Implemented a transformation layer to decouple the Frontend from the Backend.
+    -   Raw API responses are normalized into clean Domain Models before reaching the Redux Store, ensuring the UI remains resilient to backend changes (e.g., snake_case to camelCase conversion).
+
+2.  **Facade Pattern (Custom Hooks):**
+    -   Used custom hooks (e.g., `usePatients`) to abstract the complexity of `RTK Query`.
+    -   The UI components interact with a simplified API interface, remaining unaware of the underlying fetching library.
+
+3.  **Container/Presentational Pattern:**
+    -   **Smart Components (Containers):** Handle logic and state orchestration (e.g., `MainSection`).
+    -   **Dumb Components (Presentational):** Purely visual, reusable components driven by props (e.g., `PatientCard`, `Modal`).
+
+4.  **Observer Pattern:**
+    -   Leveraged Redux's subscription model to automatically update the UI whenever the server state changes (e.g., after a mutation).
+
+---
+
+## Key Features & Optimizations
+
+-   **Server-State Management:** Utilized **RTK Query** with automatic caching and tag-based invalidation. Lists update automatically upon creation/edition without manual refetches.
+-   **Responsive Grid Layout:** A fluid CSS Grid implementation (`repeat(auto-fit, minmax(...))`) ensuring perfect rendering from Desktop to Mobile/Tablet.
+-   **Interactive UI:**
+    -   **Expandable Cards:** Smooth CSS transitions for revealing long text descriptions.
+    -   **Toast Notifications:** Custom feedback system for success/error actions with auto-dismiss logic.
+-   **Performance:**
+    -   **Lazy Loading:** Native `loading="lazy"` on images to improve LCP (Largest Contentful Paint) and reduce page load times.
+    -   **Client-Side Pagination:** Instant page transitions handled locally to minimize network latency.
+
+---
+
+## Getting Started
+
+### Installation
+
+1.  Clone the repository:
+    git clone https://github.com/MatiasMarchese/challenge-healthcare.git
+    ```
+2.  Navigate to the project directory:
+    cd patient-dashboard
+    ```
+3.  Install dependencies:
+    npm install
+    ```
+
+### Running Locally and Share with any device
+
+To start the development server on your machine:
+
+npm run dev
+npm run -- --host (This enables access to the project from other devices on the same network, eliminating the need to clone the repository on each device.)
+
+## Accessing from Any Device (Network Mode)
+
+This allows you to view the application on **any device** connected to the same local network (Tablets, Smartphones, or other computers), eliminating the need to clone the repository on every machine to test it.
+
+1.  Run the host command:
+    ```bash
+    npm run dev -- --host
+    ```
+
+2.  **Check the terminal output.** Look for the line(s) labeled `Network`. Copy the IP address provided there.
+
+    *Example output:*
+    ```text
+      ➜  Local:   http://localhost:5173/
+      ➜  Network: [http://192.168.137.1:5173/](http://192.168.137.1:5173/)  <-- Use this URL
+      ➜  Network: [http://10.130.2.39:5173/](http://10.130.2.39:5173/)    <-- Or this one
+    ```
+
+3.  Enter that URL (including the port number) in the browser of your external device.
+
+> **Note:** If multiple "Network" addresses appear, try the first one. If the page does not load, ensure your computer's Firewall allows connections on port 5173.

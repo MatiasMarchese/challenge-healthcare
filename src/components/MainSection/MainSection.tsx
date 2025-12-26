@@ -8,12 +8,31 @@ import { Modal } from "../Modal/Modal";
 import { PatientsList } from "../PatientList/PatientList";
 import { Spinner } from "../Spinner/Spinner";
 import styles from "./main-section.module.css";
+import { Notification, type NotificationType } from "../Notifications/Notifications";
 
 export const MainSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+
+  const [notification, setNotification] = useState<{
+    isOpen: boolean;
+    message: string;
+    type: NotificationType;
+  }>({
+    isOpen: false,
+    message: "",
+    type: "success",
+  });
+
   const { patients, isLoading, isError, addPatient, updatePatient } =
     usePatients();
+
+    const showNotification = (
+      message: string,
+      type: NotificationType = "success"
+    ) => {
+      setNotification({ isOpen: true, message, type });
+    };
 
   const handleAdd = () => {
     setSelectedPatient(null);
@@ -22,24 +41,31 @@ export const MainSection = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setTimeout(() => setSelectedPatient(null), 300);
   };
 
-  const handleSavePatient = (formData: PatientFormData) => {
+const handleSavePatient = (formData: PatientFormData) => {
+  try {
     if (selectedPatient) {
       updatePatient(selectedPatient.id, formData);
+      showNotification("Paciente actualizado", "success");
     } else {
       addPatient(formData);
+      showNotification("Paciente creado", "success");
     }
+
     handleCloseModal();
-  };
+  } catch (error) {
+    console.error("CRASH:", error);
+    showNotification(`Error inesperado: ${error}`, "error");
+  }
+};
 
   const handleEdit = (p: Patient) => {
     setSelectedPatient(p);
     setIsModalOpen(true);
   };
   return (
-    <div style={{width: "100%"}}>
+    <div style={{ width: "100%" }}>
       <Header handleAdd={handleAdd} />
       <main className={styles.mainContainer}>
         {isLoading && <Spinner />}
@@ -66,6 +92,14 @@ export const MainSection = () => {
         {!isLoading && !isError && patients.length > 0 && (
           <PatientsList patients={patients} onEdit={handleEdit} />
         )}
+        <Notification
+          isOpen={notification.isOpen}
+          message={notification.message}
+          type={notification.type}
+          onClose={() =>
+            setNotification((prev) => ({ ...prev, isOpen: false }))
+          }
+        />
       </main>
       <Modal
         isOpen={isModalOpen}

@@ -26,7 +26,8 @@ export const usePatients = () => {
   const addPatient = useCallback(
     (formData: PatientFormData) => {
       const newPatient: Patient = {
-        id: crypto.randomUUID(),
+        // Se pasa de crypto.UUID() a este nuevo formato debido a que al probarlo en el naveador de la tablet (npm run dev -- --host) no se generaba ese id por no ser https
+        id: Date.now().toString(36) + Math.random().toString(36).substring(2),
         createdAt: new Date().toISOString(),
         ...formData,
       };
