@@ -67,7 +67,7 @@ The application follows a **Modular Component-Based Architecture**, adhering to 
 
 1.  Clone the repository:
     ```bash
-    git clone [https://github.com/MatiasMarchese/challenge-healthcare.git](https://github.com/MatiasMarchese/challenge-healthcare.git)
+    git clone https://github.com/MatiasMarchese/challenge-healthcare.git
     ```
 2.  Navigate to the project directory:
     ```bash
