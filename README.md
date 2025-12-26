@@ -76,9 +76,10 @@ This dashboard allows users to view, create, and edit patient data efficiently. 
 
 Here are the initial wireframes created before development:
 
-![Initial Wireframe](./docs/wireframe-inicial.png)
 
-![High Fidelity Mockup](./docs/diseño-mockup.png)
+![High Fidelity Mockup](./docs/diseño-ui-hallenge.png)
+![Initial Wireframe](./docs/diseño-modal-challenge.png)
+
 
 ## Tech Stack
 
