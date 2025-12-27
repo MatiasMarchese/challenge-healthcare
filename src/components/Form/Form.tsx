@@ -48,6 +48,7 @@ export const PatientForm = ({ defaultValues, onSubmit, onCancel }: PatientFormPr
           placeholder="Ej: Juan Perez"
           className={errors.name ? styles.inputError : ''}
           {...register('name', {
+            required: "El nombre es obligatorio",
             minLength: { value: 2, message: 'Mínimo 2 caracteres' }
           })}
         />
@@ -96,7 +97,6 @@ export const PatientForm = ({ defaultValues, onSubmit, onCancel }: PatientFormPr
           placeholder="Información adicional del paciente..."
           className={errors.description ? styles.inputError : ''}
           {...register('description', {
-            required: 'La descripción es obligatoria',
             minLength: { value: 1, message: 'La descripción debe tener al menos 1 caracteres' }
           })}
         />
