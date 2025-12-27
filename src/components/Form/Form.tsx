@@ -48,7 +48,7 @@ export const PatientForm = ({ defaultValues, onSubmit, onCancel }: PatientFormPr
           placeholder="Ej: Juan Perez"
           className={errors.name ? styles.inputError : ''}
           {...register('name', {
-            required: 'El nombre es obligatorio',
+            required: "El nombre es obligatorio",
             minLength: { value: 2, message: 'Mínimo 2 caracteres' }
           })}
         />
@@ -63,7 +63,6 @@ export const PatientForm = ({ defaultValues, onSubmit, onCancel }: PatientFormPr
           placeholder="https://ejemplo.com"
           className={errors.website ? styles.inputError : ''}
           {...register('website', {
-            required: 'El sitio web es obligatorio',
             pattern: {
               value: /^https?:\/\/.+\..+/,
               message: 'Debe ser una URL válida (ej: https://site.com)'
@@ -81,7 +80,6 @@ export const PatientForm = ({ defaultValues, onSubmit, onCancel }: PatientFormPr
           placeholder="https://..."
           className={errors.avatar ? styles.inputError : ''}
           {...register('avatar', {
-            required: 'La imagen es obligatoria',
             pattern: {
               value: /^https?:\/\/.+/,
               message: 'Debe ser una URL válida de imagen'
@@ -99,8 +97,7 @@ export const PatientForm = ({ defaultValues, onSubmit, onCancel }: PatientFormPr
           placeholder="Información adicional del paciente..."
           className={errors.description ? styles.inputError : ''}
           {...register('description', {
-            required: 'La descripción es obligatoria',
-            minLength: { value: 10, message: 'La descripción debe tener al menos 10 caracteres' }
+            minLength: { value: 1, message: 'La descripción debe tener al menos 1 caracteres' }
           })}
         />
         {errors.description && <span className={styles.errorMsg}>⚠ {errors.description.message}</span>}
