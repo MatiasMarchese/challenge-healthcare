@@ -4,14 +4,18 @@ A modern, high-performance Single Page Application (SPA) for managing patient re
 
 ---
 
+
 ## Table of Contents
 
-- [Getting Started](#-getting-started)
-- [Running Locally and Share with any device](#-running-locally-and-share-with-any-device)
-- [Project Overview](#-project-overview)
-- [Tech Stack](#-tech-stack)
-- [Architecture & Design Patterns](#-architecture--design-patterns)
-- [Key Features & Optimizations](#-key-features--optimizations)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Running Locally and Sharing with Other Devices](#running-locally-and-sharing-with-other-devices)
+  - [Accessing from Any Device (Network Mode)](#accessing-from-any-device-network-mode)
+- [Project Overview](#project-overview)
+- [Tech Stack](#tech-stack)
+- [Architecture & Design Patterns](#architecture--design-patterns)
+  - [Implemented Design Patterns](#implemented-design-patterns)
+- [Key Features & Optimizations](#key-features--optimizations)
 
 ---
 
@@ -28,7 +32,7 @@ A modern, high-performance Single Page Application (SPA) for managing patient re
     cd patient-dashboard
     ```
 3.  Install dependencies:
-    ```bash
+     ```bash
     npm install
     ```
 
@@ -63,17 +67,25 @@ This allows you to view the application on **any device** connected to the same 
 
 ---
 
+
 ## Project Overview
 
 This dashboard allows users to view, create, and edit patient data efficiently. It was built to demonstrate advanced frontend concepts such as **Server-State Management**, **Component Composition**, and **Performance Optimization** techniques.
+
+## Design Process
+
+Here are the initial wireframes created before development:
+
+
+![High Fidelity Mockup](./docs/diseño-ui-challenge.png)
+![Initial Wireframe](./docs/diseño-modal-challenge.png)
+
 
 ## Tech Stack
 
 - **Core:** React 18, TypeScript, Vite.
 - **State Management:** Redux Toolkit (RTK) & RTK Query.
 - **Styling:** CSS Modules (BEM methodology adapted).
-
----
 
 ## Architecture & Design Patterns
 
@@ -108,3 +120,4 @@ The application follows a **Modular Component-Based Architecture**, adhering to 
 -   **Performance:**
     -   **Lazy Loading:** Native `loading="lazy"` on images to improve LCP (Largest Contentful Paint) and reduce page load times.
     -   **Client-Side Pagination:** Instant page transitions handled locally to minimize network latency.
+
