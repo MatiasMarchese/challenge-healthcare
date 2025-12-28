@@ -4,33 +4,24 @@ import {
   type PayloadAction,
 } from "@reduxjs/toolkit";
 import { patientAdapter } from "@/adapter/patient-adapter";
-import type {
-  Patient,
-  PatientsState,
-} from "@/models/patients.interface";
-
-const LOCAL_STORAGE_KEY = "patients_data";
+import type { Patient, PatientsState } from "@/models/patients.interface";
 
 const API = import.meta.env.VITE_API_URL;
 
 export const fetchPatients = createAsyncThunk(
   "patients/fetchPatients",
   async () => {
-    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const response = await fetch(API);
 
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      return parsedData.map((item: any) => patientAdapter(item)) as Patient[];
+    if (!response.ok) {
+      throw new Error("Error en la respuesta del servidor");
     }
 
-    const response = await fetch(API);
     const data = await response.json();
 
     const adaptedData = Array.isArray(data)
       ? data.map((item: any) => patientAdapter(item))
       : [];
-
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(adaptedData));
 
     return adaptedData as Patient[];
   }
@@ -47,14 +38,12 @@ export const patientsSlice = createSlice({
   initialState,
   reducers: {
     addPatientLocal: (state, action: PayloadAction<Patient>) => {
-      state.data.push(action.payload);
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state.data));
+      state.data.unshift(action.payload);
     },
     updatePatientLocal: (state, action: PayloadAction<Patient>) => {
       const index = state.data.findIndex((p) => p.id === action.payload.id);
       if (index !== -1) {
         state.data[index] = action.payload;
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state.data));
       }
     },
   },
